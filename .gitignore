@@ -1,3 +1,15 @@
+*___*
+.vscode/
+.claude/
+MUJOCO_LOG*
+*.out
+
+*.npy
+*.npz
+*.zip
+*.swp
+CLAUDE.md
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
