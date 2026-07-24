@@ -1,0 +1,28 @@
+name: bimanual-rope
+
+# Human-maintained, minimal Conda spec for the DuoBench simulation dev environment.
+# Not a `conda env export` dump: transitive/machine-specific details are intentionally
+# omitted. pip resolves rcs-core, mujoco==3.2.6 and gymnasium~=0.29.1 via duobench.
+channels:
+  - conda-forge
+  - nodefaults
+
+dependencies:
+  - python=3.11
+  - pip>=25.1
+  - setuptools>=45
+  # Native URDF/XML libs kept from the project's starting set. RCS ships self-contained
+  # cmeel-urdfdom / cmeel-tinyxml2 wheels, so these are belt-and-suspenders; remove only
+  # if a demonstrated failure requires it.
+  - urdfdom
+  - urdfdom_headers
+  # Native GLFW so the rcs-core `glfw` python binding can load its shared library headlessly.
+  - glfw
+  - pip:
+      - duobench==0.1.0
+      # Downloads DuoBench LeRobot trajectory datasets from the Hugging Face Hub
+      # (scripts/replay_trajectory.py). Lightweight; duckdb (via rcs-core) reads the parquet.
+      - huggingface_hub
+      # Local repository package (bimanual_rope) installed editable so the custom
+      # sling_hook task is importable. Resolved relative to this file's directory.
+      - -e .

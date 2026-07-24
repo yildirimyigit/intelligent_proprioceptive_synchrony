@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=45"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bimanual-rope"
+version = "0.0.1"
+description = "Custom DuoBench/RCS bimanual sling-to-hook simulation task (Franka FR3 duo)."
+requires-python = ">=3.11"
+# Runtime dependencies (duobench -> rcs-core, mujoco, gymnasium, numpy) are provided by the
+# `bimanual-rope` Conda environment; they are intentionally not duplicated here.
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+bimanual_rope = ["assets/sling_hook/*.xml"]
