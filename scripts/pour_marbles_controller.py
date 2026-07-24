@@ -7,16 +7,16 @@ the empty cup, and place both cups back in their green target squares upright --
 for DuoBench's full stage-6 success.
 
 Extras:
-  * ``--record PATH``    save a *successful* run (initial cup/marble poses, commanded targets,
+  * ``--record PATH``    save a *successful* run (initial cup/marble state, commanded targets,
                          and measured joint trajectories for both arms) to an .npz.
   * ``--replay PATH``    restore the saved object state and replay the recorded joints.
-  * ``--save-state P``   reset once and save only the object poses (cups + marbles) to P.
-  * ``--load-state P``   restore object poses from P after reset, then run the oracle on it.
+  * ``--save-state P``   reset once and save only the object state (cups + marbles) to P.
+  * ``--load-state P``   restore object state from P after reset, then run the oracle on it.
   * ``--render``         open the interactive MuJoCo viewer (needs a local display).
   * ``--debug-frames D`` save offscreen frames at each phase to directory D (for tuning).
 
-Only object poses are restored (not robot kinodynamics), so loading always starts from the
-environment's standard robot reset.  Object velocities are deliberately reset to zero.
+Only object positions and velocities are restored (not robot kinodynamics), so loading always
+starts from the environment's standard robot reset. Legacy pose-only files use zero velocity.
 
 Usage:
     python scripts/pour_marbles_controller.py --render
@@ -62,8 +62,8 @@ def _parse_args() -> argparse.Namespace:
     p.add_argument("--render", action="store_true", help="Open the interactive viewer (needs a display).")
     p.add_argument("--record", metavar="PATH", default=None, help="Save a successful run to PATH (.npz).")
     p.add_argument("--replay", metavar="PATH", default=None, help="Replay a saved run from PATH (.npz).")
-    p.add_argument("--save-state", metavar="PATH", default=None, help="Reset, save object poses to PATH, exit.")
-    p.add_argument("--load-state", metavar="PATH", default=None, help="Restore object poses from PATH, then run.")
+    p.add_argument("--save-state", metavar="PATH", default=None, help="Reset, save object state to PATH, exit.")
+    p.add_argument("--load-state", metavar="PATH", default=None, help="Restore object state from PATH, then run.")
     p.add_argument("--debug-frames", metavar="DIR", default=None, help="Save offscreen frames per phase to DIR.")
     p.add_argument("--verbose", action="store_true", help="Print stage after each phase.")
     p.add_argument("--test-grasp", action="store_true", help="Stop after grasp+lift (for tuning the grasp).")
