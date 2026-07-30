@@ -23,6 +23,11 @@ dependencies:
       # Downloads DuoBench LeRobot trajectory datasets from the Hugging Face Hub
       # (scripts/replay_trajectory.py). Lightweight; duckdb (via rcs-core) reads the parquet.
       - huggingface_hub
+      # Plotting for demonstration-dataset inspection notebooks
+      # (data/duo/pour_marbles/inspect.ipynb).
+      - matplotlib
+      # Jupyter kernel so the inspection notebook runs against this env.
+      - ipykernel
       # Local repository package (bimanual_rope) installed editable so the custom
       # sling_hook task is importable. Resolved relative to this file's directory.
       - -e .
