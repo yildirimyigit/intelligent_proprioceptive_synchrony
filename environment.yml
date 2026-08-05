@@ -28,6 +28,12 @@ dependencies:
       - matplotlib
       # Jupyter kernel so the inspection notebook runs against this env.
       - ipykernel
+      # PyTorch for CNMP training (scripts/cnmp_data.py + models). The cu128 build is REQUIRED
+      # for the Blackwell / RTX 50-series (sm_120) GPU on this host -- the default PyPI wheel
+      # lacks sm_120 kernels ("no kernel image" at runtime). On a CPU-only or older-GPU host,
+      # replace both lines below with a plain `- torch`.
+      - --extra-index-url https://download.pytorch.org/whl/cu128
+      - torch==2.11.0+cu128
       # Local repository package (bimanual_rope) installed editable so the custom
       # sling_hook task is importable. Resolved relative to this file's directory.
       - -e .
